@@ -1,0 +1,7 @@
+docker network create sinatra_redis_network
+docker run -d --net=sinatra_redis_network --name redis-db redis
+docker run -d --net=sinatra_redis_network --name sinatra_with_redis -p 4567:4567 -v $PWD/webapp_redis:/opt/webapp pkpk1234/sinatra
+
+curl -i -H "Accept: application/json" -d "name=Foo&state=Bar" http://localhost:4567/json
+
+curl -i http://localhost:4567/json
